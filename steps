@@ -1,0 +1,48 @@
+Steps:-
+
+Step 1:-
+------------
+Create an S3 Bucket:
+In the AWS Management Console, navigate to the S3 service.
+Create a new bucket to store your MP4 file and the converted HLS output. 
+Note down the bucket name.
+
+Step 2:-
+---------------
+Upload the MP4 File:
+Go to the S3 console and select your newly created bucket.
+Click the "Upload" button and choose your MP4 video file.
+Once uploaded, right-click the file and select "Get Object URL" to obtain the public URL for accessing the file.
+Create a MediaConvert Job:
+
+Step 3:-
+------------
+Create a MediaConvert Job:
+
+In the AWS Management Console, navigate to the MediaConvert service.
+Click "Create job."
+Provide a name for your job (e.g., "MP4toHLS").
+Choose an appropriate queue (default is usually fine).
+Under "Settings," expand "Inputs" and click "Add."
+Select "S3" as the source type and paste the public URL of your uploaded MP4 file from step 2.
+Expand "Outputs" and click "Add."
+Choose "HLS" as the output type. This will create an Apple HLS package.
+You can customize output settings like bitrate, resolution, and segment duration under "Output settings." 
+Refer to the MediaConvert documentation for details on these options https://aws.amazon.com/about-aws/whats-new/2021/04/hls-inputes-available-aws-elemental-mediaconvert/.
+
+Step 4:-
+--------------------
+Run the Job:
+Review your job configuration and click "Create" to start the conversion process.
+MediaConvert will transcode your MP4 video into the HLS format. 
+You can monitor the job's progress in the MediaConvert console.
+
+
+Result:-
+-------------
+Download the HLS Output:
+
+Once the job is complete, you'll see the output location details under the "Outputs" section.
+It will typically be an S3 path within your chosen bucket.
+Navigate to the S3 console and locate the HLS output directory.
+You'll find the manifest file (usually master.m3u8) and the segmented video files.
